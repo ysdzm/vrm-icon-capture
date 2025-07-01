@@ -139,25 +139,11 @@ public class VrmBatchLoader : MonoBehaviour
         string directory = Path.GetDirectoryName(path);
         Directory.CreateDirectory(directory);
 
-        int width = Screen.width;
-        int height = Screen.height;
+        // Unity の標準スクリーンショット機能を使用
+        ScreenCapture.CaptureScreenshot(path);
+        Debug.Log($"スクリーンショット要求: {path}");
 
-        RenderTexture rt = new RenderTexture(width, height, 24);
-        cam.targetTexture = rt;
-        Texture2D screenShot = new Texture2D(width, height, TextureFormat.RGB24, false);
-
-        cam.Render();
-        RenderTexture.active = rt;
-        screenShot.ReadPixels(new Rect(0, 0, width, height), 0, 0);
-        screenShot.Apply();
-
-        cam.targetTexture = null;
-        RenderTexture.active = null;
-        Destroy(rt);
-
-        byte[] bytes = screenShot.EncodeToPNG();
-        File.WriteAllBytes(path, bytes);
-
-        await Task.Yield();
+        // スクリーンショット保存には少し時間がかかるので少し待機（1秒ほどが確実）
+        await Task.Delay(1000);
     }
 }
