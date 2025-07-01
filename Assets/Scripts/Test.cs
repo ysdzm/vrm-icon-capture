@@ -46,9 +46,21 @@ public class VrmBatchLoader : MonoBehaviour
                 }
                 else
                 {
-                    // 赤・緑・青でループして髪色を変えて撮影
-                    Color[] colors = { Color.red, Color.green, Color.blue };
-                    string[] colorNames = { "red", "green", "blue" };
+                    // 髪色バリエーション：有彩色5色
+                    Color[] colors = {
+                        Color.red,
+                        Color.yellow,
+                        Color.green,
+                        Color.blue,
+                        new Color(0.6f, 0.2f, 0.8f) // 紫系
+                    };
+                    string[] colorNames = {
+                        "red",
+                        "yellow",
+                        "green",
+                        "blue",
+                        "purple"
+                    };
 
                     for (int c = 0; c < colors.Length; c++)
                     {
