@@ -68,7 +68,7 @@ public class VrmBatchLoader : MonoBehaviour
                     for (int c = 0; c < 5; c++)
                     {
                         float hue = c / 5f;          // 0.0, 0.2, 0.4, 0.6, 0.8（360度で等間隔）
-                        float saturation = 0.8f;     // 彩度（0〜1）
+                        float saturation = 0.7f;     // 彩度（0〜1）
                         float value = 1.0f;          // 明度（0〜1）
 
                         colors[c] = Color.HSVToRGB(hue, saturation, value);
