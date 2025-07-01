@@ -46,21 +46,34 @@ public class VrmBatchLoader : MonoBehaviour
                 }
                 else
                 {
-                    // 髪色バリエーション：有彩色5色
-                    Color[] colors = {
-                        Color.red,
-                        Color.yellow,
-                        Color.green,
-                        Color.blue,
-                        new Color(0.6f, 0.2f, 0.8f) // 紫系
-                    };
-                    string[] colorNames = {
-                        "red",
-                        "yellow",
-                        "green",
-                        "blue",
-                        "purple"
-                    };
+                    // // 髪色バリエーション：有彩色5色
+                    // Color[] colors = {
+                    //     Color.red,
+                    //     Color.yellow,
+                    //     Color.green,
+                    //     Color.blue,
+                    //     new Color(0.6f, 0.2f, 0.8f) // 紫系
+                    // };
+                    // string[] colorNames = {
+                    //     "red",
+                    //     "yellow",
+                    //     "green",
+                    //     "blue",
+                    //     "purple"
+                    // };
+
+                    Color[] colors = new Color[5];
+                    string[] colorNames = new string[5];
+
+                    for (int c = 0; c < 5; c++)
+                    {
+                        float hue = c / 5f;          // 0.0, 0.2, 0.4, 0.6, 0.8（360度で等間隔）
+                        float saturation = 0.8f;     // 彩度（0〜1）
+                        float value = 1.0f;          // 明度（0〜1）
+
+                        colors[c] = Color.HSVToRGB(hue, saturation, value);
+                        colorNames[c] = $"h{(int)(hue * 360)}"; // 名前例: h0, h72, ...
+                    }
 
                     for (int c = 0; c < colors.Length; c++)
                     {
@@ -89,7 +102,7 @@ public class VrmBatchLoader : MonoBehaviour
             }
 
             // 少し待ってから次へ（例: 0.5秒）
-            await Task.Delay(500);
+            await Task.Delay(1);
         }
 
         Debug.Log("すべてのVRM処理が完了しました。");
@@ -156,6 +169,6 @@ public class VrmBatchLoader : MonoBehaviour
         Debug.Log($"スクリーンショット要求: {path}");
 
         // スクリーンショット保存には少し時間がかかるので少し待機（1秒ほどが確実）
-        await Task.Delay(1000);
+        await Task.Delay(10);
     }
 }
