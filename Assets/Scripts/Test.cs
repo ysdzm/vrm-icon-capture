@@ -107,9 +107,25 @@ public class VrmBatchLoader : MonoBehaviour
 
         Debug.Log("すべてのVRM処理が完了しました。");
     }
+
+    private void SetHairOutlineSettings(Renderer renderer)
+    {
+        Material mat = renderer.material;
+
+        mat.SetFloat("_OutlineWidthMode", 1f);        // World モード
+        mat.SetFloat("_OutlineWidth", 0.0008f);       // 太さ
+        mat.SetColor("_OutlineColor", Color.gray);   // 色
+        mat.SetFloat("_OutlineLightingMix", 1f);      // ライティング影響
+
+        renderer.materials = new Material[] { mat };  // 明示的に代入して反映
+    }
+
     private void ApplyColorToHairTexture(Renderer renderer, Color color)
     {
         var mat = renderer.material;
+
+        Debug.Log(mat);
+        SetHairOutlineSettings(renderer);
 
         if (!mat.HasProperty("_MainTex")) return;
 
